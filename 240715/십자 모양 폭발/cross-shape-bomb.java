@@ -7,7 +7,7 @@ public class Main {
     static int r, c;
 
     public static void main(String[] args) {
-        
+
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -33,8 +33,13 @@ public class Main {
         for (int i = n - 1; i >= 1; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 if (arr[i][j] == 0) {
-                    arr[i][j] = arr[i - 1][j];
-                    arr[i - 1][j] = 0;
+                    for (int k = 1; k <= i; k++) {
+                        if (arr[i - k][j] != 0) {
+                            arr[i][j] = arr[i - k][j];
+                            arr[i - k][j] = 0;
+                            break;
+                        }
+                    }
                 }
             }
         }
