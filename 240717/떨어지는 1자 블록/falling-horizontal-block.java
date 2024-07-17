@@ -32,9 +32,17 @@ public class Main {
     }
 
     private static void dropBlock(int col, int blockSize) {
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
+            //마지막 줄이면, 1로 채움.
+            if (i == n - 1) {
+                for (int j = 0; j < blockSize; j++) {
+                    arr[i][col + j] = 1;
+                }
+                return;
+            }
             for (int j = 0; j < blockSize; j++) {
                 if (arr[i][col + j] == 1) {
+                    //1을 만나면 이전 줄에 1로 채움.
                     for (int l = 0; l < blockSize; l++) {
                         arr[i - 1][col + l] = 1;
                     }
