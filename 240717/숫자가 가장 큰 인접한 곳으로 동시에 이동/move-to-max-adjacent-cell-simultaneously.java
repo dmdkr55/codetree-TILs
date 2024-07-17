@@ -38,7 +38,11 @@ public class Main {
         }
 
         //남은 구슬 수 출력
-        System.out.println(m);
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            if (beads[i][0] != -1) count++;
+        }
+        System.out.println(count);
     }
 
     private static boolean inRange(int x, int y) {
@@ -78,11 +82,14 @@ public class Main {
         //구슬이 겹치면 파괴. x좌표를 -1로 표기.
         for (int i = 0; i < beads.length; i++) {
             for (int j = i + 1; j < beads.length; j++) {
-                if (beads[i][0] != -1 && beads[i][0] == beads[j][0] && beads[i][1] == beads[j][1]) {
+                int x1 = beads[i][0], y1 = beads[i][1];
+                int x2 = beads[j][0], y2 = beads[j][1];
+
+                if (x1 != -1 && x1 == x2 && y1 == y2) {
+                    for (int k = j; k < beads.length; k++) {
+                        if (x1 == beads[k][0]) beads[k][0] = -1;
+                    }
                     beads[i][0] = -1;
-                    beads[j][0] = -1;
-                    //구슬 개수 수정
-                    m -= 2;
                     return true;
                 }
             }
