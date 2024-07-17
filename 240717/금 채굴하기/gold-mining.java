@@ -25,7 +25,7 @@ public class Main {
             int gold = search(i);
             // 손해보지 않으면서 채굴할 수 있는 가장 많은 금의 개수.
             int cost = (i * i + (i + 1) * (i + 1));
-            if (gold * m > cost && gold > maxGold) {
+            if (gold * m >= cost && gold > maxGold) {
                 maxGold = gold;
             }
         }
