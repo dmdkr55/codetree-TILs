@@ -27,9 +27,7 @@ public class Main {
                 count++;
             }
         }
-        if (count == 48) {
-            count--;
-        }
+
         System.out.println(count);
     }
 
@@ -59,8 +57,10 @@ public class Main {
         int count = 1;
         for (int i = 1; i < n; i++) {
             prevValue = arr[i - 1][col];
-            if (arr[i][col] != prevValue && count > finalResult) {
-                finalResult = count;
+            if (arr[i][col] != prevValue) {
+                if (count > finalResult) {
+                    finalResult = count;
+                }
                 count = 1;
             } else if (arr[i][col] == prevValue) {
                 count++;
