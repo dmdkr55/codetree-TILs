@@ -21,7 +21,7 @@ public class Main {
 
         //모든 K에 대하여 탐색.
         int maxGold = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             int gold = search(i);
             // 손해보지 않으면서 채굴할 수 있는 가장 많은 금의 개수.
             int cost = (i * i + (i + 1) * (i + 1));
