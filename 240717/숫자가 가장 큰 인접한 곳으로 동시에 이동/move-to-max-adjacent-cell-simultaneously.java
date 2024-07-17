@@ -8,6 +8,7 @@ public class Main {
     static int[] dx = {-1, 1, 0, 0}; //상하좌우
     static int[] dy = {0, 0, -1, 1};
     static int[][] beads; //구슬의 위치 저장
+    static int removedBeadsN = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -34,15 +35,16 @@ public class Main {
 
         //1초마다 구슬을 움직임.
         for (int i = 0; i < t; i++) {
+            m -= removedBeadsN;
             moveBeads();
         }
 
         //남은 구슬 수 출력
-        int count = 0;
-        for (int i = 0; i < m; i++) {
-            if (beads[i][0] != -1) count++;
-        }
-        System.out.println(count);
+//        int count = 0;
+//        for (int i = 0; i < m; i++) {
+//            if (beads[i][0] != -1) count++;
+//        }
+        System.out.println(m);
     }
 
     private static boolean inRange(int x, int y) {
@@ -86,11 +88,16 @@ public class Main {
                 int x2 = beads[j][0], y2 = beads[j][1];
 
                 if (x1 != -1 && x1 == x2 && y1 == y2) {
+                    removedBeadsN = 0;
                     for (int k = j; k < beads.length; k++) {
                         // 같은 값을 가지는 구슬들을 모두 파괴.
-                        if (x1 == beads[k][0] && y1 == beads[k][1]) beads[k][0] = -1;
+                        if (x1 == beads[k][0] && y1 == beads[k][1]) {
+                            beads[k][0] = -1;
+                            removedBeadsN++;
+                        }
                     }
                     beads[i][0] = -1;
+                    removedBeadsN++;
                     return true;
                 }
             }
