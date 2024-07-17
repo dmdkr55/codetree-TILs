@@ -87,7 +87,8 @@ public class Main {
 
                 if (x1 != -1 && x1 == x2 && y1 == y2) {
                     for (int k = j; k < beads.length; k++) {
-                        if (x1 == beads[k][0]) beads[k][0] = -1;
+                        // 같은 값을 가지는 구슬들을 모두 파괴.
+                        if (x1 == beads[k][0] && y1 == beads[k][1]) beads[k][0] = -1;
                     }
                     beads[i][0] = -1;
                     return true;
