@@ -38,7 +38,8 @@ public class Main {
     }
 
     private static void turn() {
-        if (countTurn>4){
+        if (countTurn > 4) {
+            countTurn = 0;
             return;
         }
         countTurn++;
@@ -60,9 +61,6 @@ public class Main {
             turn();
             nx = currX + dx[dir];
             ny = currY + dy[dir];
-        }
-        if (inRange(nx, ny) && arr[nx][ny] == -1) {
-            return;
         }
         //앞이 격자 밖이라면 탈출
         if (!inRange(nx, ny)) {
