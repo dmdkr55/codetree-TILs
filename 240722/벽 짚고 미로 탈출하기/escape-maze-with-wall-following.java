@@ -8,6 +8,7 @@ public class Main {
     static int[] dy = {1, 0, -1, 0};
     static int dir = 0;
     static boolean isEscaped = false;
+    static int countTurn = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -37,6 +38,10 @@ public class Main {
     }
 
     private static void turn() {
+        if (countTurn>4){
+            return;
+        }
+        countTurn++;
         dir = (dir + 1) % 4; //반시계 회전
         int nx = currX + dx[dir];
         int ny = currY + dy[dir];
