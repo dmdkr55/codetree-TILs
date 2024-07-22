@@ -28,7 +28,7 @@ public class Main {
 
         //미로를 탈출할 때까지 이동.
         while (!isEscaped) {
-            if (t > 2 * n) break;
+            if (t > n * n) break;
             t++;
             move();
         }
