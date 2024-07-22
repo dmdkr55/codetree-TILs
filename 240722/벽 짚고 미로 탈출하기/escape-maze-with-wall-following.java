@@ -30,6 +30,7 @@ public class Main {
         while (!isEscaped) {
             if (t > n * n) break;
             t++;
+            //System.out.println("t = " + t + " " + currX + " " + currY);
             move();
         }
         //출력
@@ -82,6 +83,8 @@ public class Main {
             currY = ny;
             arr[currX][currY] = 1;
         }
+        
+        countTurn = 0;
     }
 
 }
