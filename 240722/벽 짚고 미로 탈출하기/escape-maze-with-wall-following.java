@@ -36,6 +36,13 @@ public class Main {
         else System.out.println(-1);
     }
 
+    private static void turn() {
+        dir = (dir + 1) % 4; //반시계 회전
+        int nx = currX + dx[dir];
+        int ny = currY + dy[dir];
+        if (inRange(nx, ny) && arr[nx][ny] == -1) turn(); //다시 턴
+    }
+
     private static boolean inRange(int x, int y) {
         return x >= 0 && x < n && y >= 0 && y < n;
     }
@@ -45,10 +52,11 @@ public class Main {
         int ny = currY + dy[dir];
         //앞이 벽이면 반시계 회전
         if (inRange(nx, ny) && arr[nx][ny] == -1) {
-            dir = (dir + 1) % 4;
+            turn();
             nx = currX + dx[dir];
             ny = currY + dy[dir];
-            move();
+        }
+        if (inRange(nx, ny) && arr[nx][ny] == -1) {
             return;
         }
         //앞이 격자 밖이라면 탈출
