@@ -27,25 +27,35 @@ public class Main {
 
             M = Integer.parseInt(st.nextToken());
             beads = new ArrayList<>(); //x,y,dir
+            boolean isClear = true;
+            int prevY = 0;
+            int prevD = 0;
             for (int j = 0; j < M; j++) {
                 st = new StringTokenizer(br.readLine());
                 int x = Integer.parseInt(st.nextToken()) - 1;
                 int y = Integer.parseInt(st.nextToken()) - 1;
                 int d = getDirection(st.nextToken().charAt(0)); //0, 1, 2로 방향을 저장.
                 int[] temp = {x, y, d};
+                if (j != 0 && isClear && (y - prevY) != 2 && prevD != d) { //이 조건일 때 구슬이 제거되지 않음.
+                    isClear = false;
+                }
+                prevY = y;
+                prevD = d;
                 beads.add(temp);
             }
 
             //이동
             for (int j = 0; j < 2 * N; j++) {
+                if (isClear) break;
                 move();
             }
 
             //출력
-            sb.append(beads.size()).append("\n");
+//            sb.append(beads.size()).append("\n");
+            System.out.println(beads.size());
         }
 
-        System.out.print(sb);
+//        System.out.print(sb);
     }
 
     static boolean inRange(int x, int y) {
