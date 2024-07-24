@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -9,21 +11,24 @@ public class Main {
     static int[] dy = {0, -1, 0, 1};
     static int[][] beads;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         //입력
-        T = sc.nextInt();
+        T = Integer.parseInt(br.readLine());
         for (int i = 0; i < T; i++) {
-            N = sc.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            N = Integer.parseInt(st.nextToken());
             arr = new int[N][N];
 
-            M = sc.nextInt();
+            M = Integer.parseInt(st.nextToken());
             beads = new int[M][3]; //x,y,dir
             for (int j = 0; j < M; j++) {
-                beads[j][0] = sc.nextInt() - 1;
-                beads[j][1] = sc.nextInt() - 1;
-                char d = sc.next().charAt(0);
+                st = new StringTokenizer(br.readLine());
+                beads[j][0] = Integer.parseInt(st.nextToken()) - 1;
+                beads[j][1] = Integer.parseInt(st.nextToken()) - 1;
+                char d = st.nextToken().charAt(0);
                 beads[j][2] = getDirection(d); //0, 1, 2로 방향을 저장.
             }
 
@@ -37,24 +42,21 @@ public class Main {
             for (int j = 0; j < beads.length; j++) {
                 if (beads[j][2] != -1) count++;
             }
-            System.out.println(count);
+            sb.append(count).append("\n");
         }
+
+        System.out.print(sb.toString());
     }
 
     static boolean inRange(int x, int y) {
         return x >= 0 && x < N && y >= 0 && y < N;
     }
 
-    static int getDirection(int d) {
+    static int getDirection(char d) {
         if (d == 'U') return 0;
         else if (d == 'L') return 1;
         else if (d == 'D') return 2;
         else if (d == 'R') return 3;
-        else if (d == 0) return 'U';
-        else if (d == 1) return 'L';
-        else if (d == 2) return 'D';
-        else if (d == 3) return 'R';
-
         return -1;
     }
 
@@ -89,5 +91,4 @@ public class Main {
             if (isRemoved) beads[i][2] = -1;
         }
     }
-
 }
