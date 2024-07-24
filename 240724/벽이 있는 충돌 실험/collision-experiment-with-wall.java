@@ -36,7 +36,7 @@ public class Main {
                 int y = Integer.parseInt(st.nextToken()) - 1;
                 int d = getDirection(st.nextToken().charAt(0)); //0, 1, 2로 방향을 저장.
                 int[] temp = {x, y, d};
-                if (j != 0 && isClear && (y - prevY) != 2 && prevD != d) { //이 조건일 때 구슬이 제거되지 않음.
+                if (y != 0 && y != 48 && isClear && ((y - prevY) != 2 || prevD != d)) { //이 조건일 때 구슬이 제거되지 않음.
                     isClear = false;
                 }
                 prevY = y;
