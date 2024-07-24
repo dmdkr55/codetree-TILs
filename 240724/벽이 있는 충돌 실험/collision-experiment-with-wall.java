@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -9,7 +12,7 @@ public class Main {
     static int[][] arr;
     static int[] dx = {-1, 0, 1, 0}; //상좌하우, 반시계방향
     static int[] dy = {0, -1, 0, 1};
-    static int[][] beads;
+    static ArrayList<int[]> beads;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,13 +26,14 @@ public class Main {
             arr = new int[N][N];
 
             M = Integer.parseInt(st.nextToken());
-            beads = new int[M][3]; //x,y,dir
+            beads = new ArrayList<>(); //x,y,dir
             for (int j = 0; j < M; j++) {
                 st = new StringTokenizer(br.readLine());
-                beads[j][0] = Integer.parseInt(st.nextToken()) - 1;
-                beads[j][1] = Integer.parseInt(st.nextToken()) - 1;
-                char d = st.nextToken().charAt(0);
-                beads[j][2] = getDirection(d); //0, 1, 2로 방향을 저장.
+                int x = Integer.parseInt(st.nextToken()) - 1;
+                int y = Integer.parseInt(st.nextToken()) - 1;
+                int d = getDirection(st.nextToken().charAt(0)); //0, 1, 2로 방향을 저장.
+                int[] temp = {x, y, d};
+                beads.add(temp);
             }
 
             //이동
@@ -38,15 +42,10 @@ public class Main {
             }
 
             //출력
-            int count = 0;
-            for (int j = 0; j < beads.length; j++) {
-                if (beads[j][2] != -1) count++;
-            }
-//            sb.append(count).append("\n");
-            System.out.println(count);
+            sb.append(beads.size()).append("\n");
         }
 
-//        System.out.print(sb);
+        System.out.print(sb);
     }
 
     static boolean inRange(int x, int y) {
@@ -62,34 +61,40 @@ public class Main {
     }
 
     static void move() {
-        for (int i = 0; i < beads.length; i++) {
-            if (beads[i][2] != -1) { //방향이 -1이면 없어진 구슬로.
-                int x = beads[i][0];
-                int y = beads[i][1];
-                int dir = beads[i][2];
-                int nx = x + dx[dir];
-                int ny = y + dy[dir];
+        for (int i = 0; i < beads.size(); i++) {
+            int x = beads.get(i)[0];
+            int y = beads.get(i)[1];
+            int dir = beads.get(i)[2];
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
 
-                //격자 안인지 확인. 벽이면 반대 방향으로 턴
-                if (!inRange(nx, ny)) {
-                    dir = (dir + 2) % 4; //ex) 0, 1, 2
-                    beads[i][2] = dir;
-                } else {
-                    beads[i][0] = nx;
-                    beads[i][1] = ny;
-                }
+            //격자 안인지 확인. 벽이면 반대 방향으로 턴
+            if (!inRange(nx, ny)) {
+                dir = (dir + 2) % 4; //ex) 0, 1, 2
+                beads.get(i)[2] = dir;
+            } else {
+                beads.get(i)[0] = nx;
+                beads.get(i)[1] = ny;
             }
         }
         //부딛히면 제거
-        for (int i = 0; i < beads.length; i++) {
+        ArrayList<Integer> removeIndex = new ArrayList<>();
+        for (int i = 0; i < beads.size(); i++) {
             boolean isRemoved = false;
-            for (int j = i + 1; j < beads.length; j++) {
-                if (beads[i][2] != -1 && beads[j][2] != -1 && beads[i][0] == beads[j][0] && beads[i][1] == beads[j][1]) {
+            for (int j = i + 1; j < beads.size(); j++) {
+                if (Objects.equals(beads.get(i)[0], beads.get(j)[0]) && Objects.equals(beads.get(i)[1], beads.get(j)[1])) {
                     isRemoved = true;
-                    beads[j][2] = -1;// 겹치는 거 제거
+                    removeIndex.add(j);
                 }
             }
-            if (isRemoved) beads[i][2] = -1;
+            if (isRemoved)
+                removeIndex.add(i);
+        }
+
+        removeIndex.sort(Comparator.reverseOrder());
+        for (int i = 0; i < removeIndex.size(); i++) {
+            int index = removeIndex.get(i);
+            beads.remove(index);
         }
     }
 }
