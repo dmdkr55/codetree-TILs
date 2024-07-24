@@ -42,10 +42,11 @@ public class Main {
             for (int j = 0; j < beads.length; j++) {
                 if (beads[j][2] != -1) count++;
             }
-            sb.append(count).append("\n");
+//            sb.append(count).append("\n");
+            System.out.println(count);
         }
 
-        System.out.print(sb.toString());
+//        System.out.print(sb);
     }
 
     static boolean inRange(int x, int y) {
