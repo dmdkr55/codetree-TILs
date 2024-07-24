@@ -35,20 +35,14 @@ public class Main {
         DFS(1);
 
         //출력
-//        for (int i = 1; i <= n; i++) {
-//            for (int j = 0; j < graph[i].size(); j++) {
-//                System.out.print(graph[i].get(j) + " ");
-//            }
-//            System.out.println();
-//        }
-        System.out.println(count-1);
+        System.out.println(count);
     }
 
     static void DFS(int vertex) {
         for (int i = 0; i < graph[vertex].size(); i++) {
             int currV = graph[vertex].get(i);
             if (!visited[currV]) {
-                count++;
+                if (currV != 1) count++;
                 visited[currV] = true;
                 DFS(currV);
             }
