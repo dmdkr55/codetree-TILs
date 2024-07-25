@@ -58,6 +58,7 @@ public class Main {
                 visited[nx][ny] = true;
                 answer[nx][ny] = 1;
                 DFS(nx, ny);
+                visited[nx][ny] = false;
             }
 
         }
