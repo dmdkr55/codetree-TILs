@@ -49,7 +49,7 @@ public class Main {
     }
 
     static boolean inRange(int x, int y) {
-        return x >= 0 && y >= 0 && x < n && y < n;
+        return x >= 0 && y >= 0 && x < n && y < m;
     }
 
     static boolean canGo(int x, int y) {
@@ -80,6 +80,5 @@ public class Main {
             }
         }
     }
-
 
 }
