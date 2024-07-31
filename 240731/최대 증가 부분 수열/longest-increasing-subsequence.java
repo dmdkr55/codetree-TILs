@@ -25,19 +25,24 @@ public class Main {
                 if (dp[j] == INT_MIN)
                     continue;
 
-                if (j + arr[j] >= i)
+                if (arr[i] > arr[j])
                     dp[i] = Math.max(dp[i], dp[j] + 1);
             }
         }
 
-        System.out.println(dp[n - 1]);
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] > max)
+                max = dp[i];
+        }
+        System.out.println(max);
     }
 
     static void initialize() {
         for (int i = 0; i < n; i++) {
             dp[i] = INT_MIN;
         }
-        dp[0] = 0;
+        dp[0] = 1;
     }
 
 
