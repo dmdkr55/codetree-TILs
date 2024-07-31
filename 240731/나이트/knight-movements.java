@@ -27,6 +27,11 @@ public class Main {
         n = sc.nextInt();
         grid = new int[n][n];
         step = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                step[i][j] = -1;
+            }
+        }
         visited = new boolean[n][n];
         r1 = sc.nextInt() - 1;
         c1 = sc.nextInt() - 1;
@@ -38,11 +43,7 @@ public class Main {
         BFS();
 
         //출력
-        if (step[r2][c2] == 0) {
-            System.out.println(-1);
-        } else {
-            System.out.println(step[r2][c2]);
-        }
+        System.out.println(step[r2][c2]);
     }
 
     static boolean inRange(int x, int y) {
