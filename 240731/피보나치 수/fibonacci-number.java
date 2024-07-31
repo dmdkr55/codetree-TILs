@@ -10,7 +10,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        dp = new int[n + 1];
+        dp = new int[46];
         dp[1] = 1;
         dp[2] = 1;
 
