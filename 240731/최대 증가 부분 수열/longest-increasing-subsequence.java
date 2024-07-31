@@ -22,9 +22,6 @@ public class Main {
 
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
-                if (dp[j] == INT_MIN)
-                    continue;
-
                 if (arr[i] > arr[j])
                     dp[i] = Math.max(dp[i], dp[j] + 1);
             }
@@ -40,9 +37,8 @@ public class Main {
 
     static void initialize() {
         for (int i = 0; i < n; i++) {
-            dp[i] = INT_MIN;
+            dp[i] = 1;
         }
-        dp[0] = 1;
     }
 
 
