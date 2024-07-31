@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
@@ -12,40 +13,28 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        coins = new int[101];
+        coins = new int[n];
         for (int i = 0; i < n; i++) {
             coins[i] = sc.nextInt();
         }
-        dp = new int[10001];
+        dp = new int[m + 1];
 
-        initialize();
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0; // 0원을 만드는 데 필요한 동전 수는 0개
 
-        int maxCoin = coins[n - 1];
-        for (int i = maxCoin + 1; i < m + 1; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < n; j++) {
-                if (dp[i - coins[j]] == 0)
-                    continue;
-
-                if (dp[i - coins[j]] < min) {
-                    min = dp[i - coins[j]] + 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = coins[i]; j <= m; j++) {
+                if (dp[j - coins[i]] != Integer.MAX_VALUE) {
+                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
                 }
             }
-            dp[i] = min;
         }
 
         //출력
-        if (dp[m] == 0) {
+        if (dp[m] == Integer.MAX_VALUE) {
             System.out.println(-1);
         } else {
             System.out.println(dp[m]);
         }
     }
-
-    static void initialize() {
-        for (int i = 0; i < n; i++) {
-            dp[coins[i]] = 1;
-        }
-    }
-
 }
