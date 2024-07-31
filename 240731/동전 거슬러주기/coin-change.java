@@ -12,11 +12,11 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        coins = new int[n];
+        coins = new int[101];
         for (int i = 0; i < n; i++) {
             coins[i] = sc.nextInt();
         }
-        dp = new int[m + 1];
+        dp = new int[10001];
 
         initialize();
 
@@ -26,7 +26,7 @@ public class Main {
             for (int j = 0; j < n; j++) {
                 if (dp[i - coins[j]] == 0)
                     continue;
-                
+
                 if (dp[i - coins[j]] < min) {
                     min = dp[i - coins[j]] + 1;
                 }
