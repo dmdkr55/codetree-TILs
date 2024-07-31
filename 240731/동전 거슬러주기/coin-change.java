@@ -35,7 +35,7 @@ public class Main {
         }
 
         //출력
-        if (dp[m] == Integer.MAX_VALUE) {
+        if (dp[m] == 0) {
             System.out.println(-1);
         } else {
             System.out.println(dp[m]);
