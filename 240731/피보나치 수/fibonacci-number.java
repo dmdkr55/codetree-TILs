@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -10,24 +10,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        dp = new int[46];
+        dp = new int[n + 1];
         dp[1] = 1;
-        dp[2] = 1;
-
-        int result = 0;
-        if (n <= 2) {
-            result = dp[n];
-        } else {
-            result = fibo(n);
+        if (n > 1) {
+            dp[2] = 1;
         }
 
-        System.out.println(result);
-    }
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
 
-    static int fibo(int n) {
-        if (dp[n] != 0)
-            return dp[n];
-        return fibo(n - 1) + fibo(n - 2);
+        System.out.println(dp[n]);
     }
-
 }
